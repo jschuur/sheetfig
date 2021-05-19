@@ -1,0 +1,48 @@
+{
+  "name": "sheetfig",
+  "version": "0.1.0",
+  "description": "Export Google Sheets data to JSON config files",
+  "main": "src/sheetfig.js",
+  "bin": {
+    "sheetfig": "dist/sheetfig.js"
+  },
+  "scripts": {
+    "dev": "node util/build.js --dev",
+    "clean": "rimraf dist",
+    "build": "npm run clean; node util/build.js",
+    "prepublishOnly": "npm run build",
+    "test": "sheetfig download -s 1ar2hlURAhuvtwZEDnNRzn-3WdRepRSjC-x2vII_FnCY -x notes -r 2,3 -o tmp",
+    "test2": "sheetfig download -s 1ar2hlURAhuvtwZEDnNRzn-3WdRepRSjC-x2vII_FnCY -n 2 -r 3 -o tmp"
+  },
+  "keywords": [
+    "google-sheets"
+  ],
+  "author": {
+    "name": "Joost Schuur",
+    "email": "jschuur@jschuur.com",
+    "url": "https://joostschuur.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jschuur/sheetfig.git"
+  },
+  "bugs": "https://github.com/jschuur/sheetfig/issues",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^7.1.0",
+    "dotenv": "^9.0.2",
+    "jsonfile": "^6.1.0",
+    "open": "^8.0.7",
+    "ora": "^5.3.0",
+    "parse-numeric-range": "^1.2.0",
+    "pluralize": "^8.0.0",
+    "pretty-bytes": "^5.6.0",
+    "spreadsheet-to-json": "^2.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.12.1",
+    "minimist": "^1.2.5",
+    "rimraf": "^3.0.2"
+  }
+}
