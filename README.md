@@ -1,10 +1,10 @@
 # Sheetfig
 
-Store your data in a Google Sheet and download it to JSON. What could possibly go wrong?
+Store your config data in a Google Sheet and download it to JSON files. What could possibly go wrong?
 
 ## Overview
 
-Sheetfig is a command line utility to intelligently download data from a Google spreadsheet to local JSON files. This lets you use Google Sheets as a mini CMS and then export it into JSON config files. The rows of a sheet become objects in an array with the columns as its properties.
+Sheetfig is a command line utility to intelligently download data from a Google spreadsheet to local JSON files, allowing you to use Google Sheets as a mini CMS. The rows of a sheet become objects in an array with the columns as its properties.
 
 It uses [spreadsheet-to-json](https://www.npmjs.com/package/spreadsheet-to-json) under the hood to hit the Google Drive API, but adds additional niceties to determine what data gets exported:
 
@@ -18,10 +18,10 @@ It uses [spreadsheet-to-json](https://www.npmjs.com/package/spreadsheet-to-json)
 * Install globally via `npm -g i sheetfig`.
 * [Create](https://sheets.new) a new Google Sheet.
 * To download data from a Google sheet, you will need to [create a Google service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts#iam-service-accounts-rename-console) under a Google Cloud project with the Google Sheets API [added](https://developers.google.com/workspace/guides/create-project#enable-api). This is possible under the free access tier.
-* At the end of the service account creation process, create a private key of the type JSON and download it. The `client_email` and `private_key` properties from this key file will be needed as credentials to download your Google Sheet data. Sheetfig can accept them via CLI options, a local `.env` file or the `GOOGLE_CLIENT_EMAIL` and `GOOGLE_PRIVATE_KEY` environment variables.
+* At the end of the service account creation process, [create](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) a private key of the type JSON and download it. The `client_email` and `private_key` properties from this key file will be needed as credentials to download your Google Sheet data. Sheetfig can accept them via CLI options, a local `.env` file or the `GOOGLE_CLIENT_EMAIL` and `GOOGLE_PRIVATE_KEY` environment variables.
 * [Share access](https://support.google.com/docs/answer/2494822) to the sheet for the `client_email` (Viewer access is sufficient).
 * Add a few columns and rows of data to the sheet and use the first row as your field names. Rename the worksheet (tab) from `Sheet1` to `test.json`.
-* Run `sheetfig download -s SHEETID`, where `SHEETID` is the long random number in the Google Sheet URL after `spreadsheets/d/` and before `/edit`. It will likely start with a `1`. You can also specify it as `SHEET_ID` in the `.env` file or as an environment variable with the same name.
+* Run `sheetfig download -s SHEETID`, where `SHEETID` is the long random string of characters in the Google Sheet URL after `spreadsheets/d/` and before `/edit`. It will likely start with a `1`. You can also specify it as `SHEET_ID` in the `.env` file or as an environment variable with the same name.
 * You should now have a `test.json` file in your current directory.
 
 Run `sheetfig --help` for more options.
@@ -38,7 +38,7 @@ You can pass in additional CLI options to determine which columns or rows to exp
 
 * Pass in a comma-separated list of fields via `-x` or `--exclude-fields` and `-i` or `--include-fields` to exclude or only include specific fields.
 * Pass in a [range](https://www.npmjs.com/package/parse-numeric-range#supported-expressions) of line numbers via `-r` or `--ignore-rows` to not export them.
-* Specify a row number via `-n` or `--include-instructions` with a range of checkboxes to only include columns with a checked checkbox[example](#example)).
+* Specify a row number via `-n` or `--include-instructions` with a range of checkboxes to only include columns with a checked checkbox ([example](#example)).
 
 Arrays and objects can also produced based on the field names used in the header row:
 
